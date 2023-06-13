@@ -193,7 +193,6 @@ public class Home {
                         } else if (quantity < Actualqtn) {
                             WebElement Minusbutton = MinusIcons.get(i);
                             Minusbutton.click();
-                            Thread.sleep(1000);
                         } else if (quantity == Actualqtn) {
                             break;
                         }
