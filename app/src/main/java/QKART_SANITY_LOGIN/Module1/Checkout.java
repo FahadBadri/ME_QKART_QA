@@ -1,15 +1,12 @@
 package QKART_SANITY_LOGIN.Module1;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
- import java.util.List;
-
-// import org.openqa.selenium.By;
-// import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-// import org.openqa.selenium.support.ui.ExpectedConditions;
-// import org.openqa.selenium.support.ui.WebDriverWait;
+//import org.openqa.selenium.support.ui.ExpectedConditions;
+//import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Checkout {
     RemoteWebDriver driver;
@@ -76,10 +73,18 @@ public class Checkout {
             }
 
 
+        //     return false;
+        // } catch (Exception e) {
+        //     System.out.println(
+        //             "Exception Occurred while selecting the given address: " + e.getMessage());
+        //     /*
+             /* Iterate through all the address boxes to find the address box with matching
+             * text, addressToSelect and click on it
+             */
+            System.out.println("Unable to find the given address");
             return false;
         } catch (Exception e) {
-            System.out.println(
-                    "Exception Occurred while selecting the given address: " + e.getMessage());
+            System.out.println("Exception Occurred while selecting the given address: " + e.getMessage());
             return false;
         }
 
@@ -107,18 +112,15 @@ public class Checkout {
      */
     public Boolean verifyInsufficientBalanceMessage() {
         try {
-            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 08: MILESTONE 7
-            WebElement InsuffBalance = driver.findElement(By.xpath("//div[@id='notistack-snackbar']"));
-            InsuffBalance.getText();
-            if(InsuffBalance.equals("You do not have enough balance in your wallet for this purchase")){
-                return  true;
-            }
-
-
-           return true;
+             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 08: MILESTONE 7
+             WebElement InsuffBalance = driver.findElement(By.xpath("//div[@id='notistack-snackbar']"));
+             InsuffBalance.getText();
+             if(InsuffBalance.equals("You do not have enough balance in your wallet for this purchase")){
+                 return  true;
+             }
+            return false;
         } catch (Exception e) {
-            System.out.println(
-                    "Exception while verifying insufficient balance message: " + e.getMessage());
+            System.out.println("Exception while verifying insufficient balance message: " + e.getMessage());
             return false;
         }
     }
