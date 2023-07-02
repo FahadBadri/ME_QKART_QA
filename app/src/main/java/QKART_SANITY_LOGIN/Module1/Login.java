@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
 public class Login {
+    private static final Class<? extends Throwable> NoSuchElementException = null;
     RemoteWebDriver driver;
     String url = "https://crio-qkart-frontend-qa.vercel.app/login";
 
@@ -48,8 +49,11 @@ public class Login {
 
         // SLEEP_STMT_13: Wait for Login to Complete
         // Wait for Login action to complete
-        Thread.sleep(5000);
-
+        // Thread.sleep(5000);
+        FluentWait<WebDriver> wait =
+                new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(30))
+                        .pollingEvery(Duration.ofMillis(250)).ignoring(NoSuchElementException.class);
+            wait.until(ExpectedConditions.invisibilityOf(login_button));
         return this.VerifyUserLoggedIn(Username);
     }
 

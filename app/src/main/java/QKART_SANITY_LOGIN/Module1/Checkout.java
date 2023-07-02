@@ -1,12 +1,15 @@
 package QKART_SANITY_LOGIN.Module1;
 
 import java.util.List;
-
+import java.util.concurrent.TimeUnit;
+import com.google.gson.annotations.Until;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
-// import org.openqa.selenium.support.ui.ExpectedConditions;
-// import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 public class Checkout {
     RemoteWebDriver driver;
@@ -32,16 +35,17 @@ public class Checkout {
              * Click on the "Add new address" button, enter the addressString in the address text
              * box and click on the "ADD" button to save the address
              */
-            WebElement addNewAddress =
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+             WebElement addNewAddress =
                     driver.findElement(By.xpath("//button[text()='Add new address']"));
             addNewAddress.click();
-            Thread.sleep(2000);
+            //Thread.sleep(2000);
             WebElement fillAddress = driver.findElement(
                     By.xpath("//textarea[@placeholder='Enter your complete address']"));
             fillAddress.sendKeys(addresString);
             WebElement addbutton = driver.findElement(By.xpath("//button[text()='Add']"));
             addbutton.click();
-            Thread.sleep(2000);
+           // Thread.sleep(2000);
             WebElement SelectingAddress = driver.findElement(By.xpath("//input[@type='radio']"));
             SelectingAddress.click();
             return false;
@@ -99,8 +103,14 @@ public class Checkout {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find the "PLACE ORDER" button and click on it
-            WebElement placeorder = driver.findElement(By.xpath("//button[text()='PLACE ORDER']"));
-            placeorder.click();
+           // WebDriverWait wait = new WebDriverWait(driver, 5);
+        //    wait = until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/button[2]")));
+            if(driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/button[2]")).isEnabled()){
+                driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/button[2]")).click();
+                //return true;
+            }
+            // placeorder.click();
+           
             return true;
 
         } catch (Exception e) {
@@ -108,6 +118,8 @@ public class Checkout {
             return false;
         }
     }
+
+  
 
     /*
      * Return Boolean denoting if the insufficient balance message is displayed
